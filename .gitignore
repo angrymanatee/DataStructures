@@ -6,4 +6,5 @@
 *.ear
 
 # Other Resources #
-*.pdf
+pdfhandouts/
+doc/
