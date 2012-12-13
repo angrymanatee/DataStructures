@@ -1,20 +1,30 @@
-# Makefile for the Towers of Hanoi problem
-JFLAGS=-g -d bin
-JRUN=-classpath bin/
+# Makefile for the Towers of Hanoi
 
-SOURCES=$(wildcard src/*.java)
-OBJECTS=$(patsubst src/%.java,bin/%.class,$(SOURCES))
+SOURCEPATH=src
+BUILDPATH=bin
+DOCPATH=doc
 
-MAIN=hello
+SOURCES=$(wildcard $(SOURCEPATH)/*.java)
+OBJECTS=$(patsubst $(SOURCEPATH)/%.java,$(BUILDPATH)/%.class,$(SOURCES))
+
+JCOMPFLAGS=-g -classpath $(SOURCEPATH)/ -d $(BUILDPATH)/
+JRUNFLAGS=-classpath $(BUILDPATH)/
+DOCFLAGS=-classpath $(SOURCEPATH)/ -d $(DOCPATH)/
+
+MAIN=NULL
 
 all: build
 
 run:
-	java $(JRUN) $(MAIN)
+	java $(JRUNFLAGS) $(MAIN)
+
+doc:
+	@mkdir -p $(DOCPATH)
+	javadoc $(DOCFLAGS) $(SOURCES)
 
 build:
-	@mkdir -p bin
-	javac $(JFLAGS) $(SOURCES)
+	@mkdir -p $(BUILDPATH)
+	javac $(JCOMPFLAGS) $(SOURCES)
 
 clean:
-	rm -rf bin $(OBJECTS)
+	rm -rf $(BUILDPATH) $(DOCPATH) $(OBJECTS)
