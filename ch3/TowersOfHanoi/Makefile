@@ -51,8 +51,8 @@ doc:
 jar: main
 	$(JARJAR) $(JARFLAGS) $(MAINPATH)
 
-run:
-	java $(JRUNFLAGS) $(MAINNAME)
+run: main
+	java $(JRUNFLAGS) $(MAINPATH)/$(MAINNAME)
 
 folders: 
 	@mkdir -p $(CLASSPATH)/$(MAINPATH) $(CLASSPATH)/$(TESTPATH)
