@@ -1,42 +1,61 @@
 # Makefile for the Towers of Hanoi
 
+# Command line tools to use
+JC=javac
+JDOC=javadoc
+JARJAR=jar
+
+# Desired file paths
 SOURCEPATH=src
 CLASSPATH=bin
 DOCPATH=doc
+
+# Path to main and 
 MAINPATH=main
 TESTPATH=tests
 
-MAIN=NULL
+# Name of main function
+MAINNAME=HanoiSolver
 MANIFEST=$(SOURCEPATH)/manifest.txt
 
+# Files that will need to be updated. Note normal files separated from test files.
 MAINFILES=$(shell find $(SOURCEPATH)/$(MAINPATH) -name *.java)
+MAINCLASSFILES=$(patsubst $(SOURCEPATH)/%.java, $(CLASSPATH)/%.class, $(MAINFILES))
 TESTFILES=$(shell find $(SOURCEPATH)/$(TESTPATH) -name *.java)
+TESTCLASSFILES=$(patsubst $(SOURCEPATH)/%.java, $(CLASSPATH)/%.class, $(TESTFILES))
+ALLCLASSFILES=$(MAINCLASSFILES) $(TESTCLASSFILES)
 
-JCOMPFLAGS=-g -classpath $(CLASSPATH) -d $(CLASSPATH)
-JTESTFLAGS=-g -classpath $(CLASSPATH) -d $(CLASSPATH)
+# Flags for command line tools
+JFLAGS=-g -sourcepath $(SOURCEPATH) -classpath $(CLASSPATH) -d $(CLASSPATH)
 JRUNFLAGS=-classpath $(CLASSPATH)
-JARFLAGS=cvfm $(CLASSPATH)/$(MAIN).jar $(MANIFEST)
-DOCFLAGS=-classpath $(CLASSPATH) -d $(DOCPATH)
+JARFLAGS=cf $(MAINNAME).jar -C $(CLASSPATH)
+DOCFLAGS=-classpath $(CLASSPATH) -sourcepath $(SOURCEPATH) -d $(DOCPATH)
 
-all: build
+# Files named clean are stupid
+.PHONY: clean
 
-build:
-	@mkdir -p $(CLASSPATH)/$(MAINPATH)
-	javac $(JCOMPFLAGS) $(MAINFILES)
+all: main
 
-run:
-	java $(JRUNFLAGS) $(MAIN)
+main: folders $(MAINCLASSFILES)
+
+tests: main $(TESTCLASSFILES)
+
+# All class files in bin depend on their corresponding files in src
+$(ALLCLASSFILES): $(CLASSPATH)%.class: $(SOURCEPATH)%.java
+	$(JC) $(JFLAGS) $<
 
 doc:
 	@mkdir -p $(DOCPATH)
 	javadoc $(DOCFLAGS) $(MAINFILES)
 
-tests: build
-	@mkdir -p $(CLASSPATH)/$(TESTPATH)
-	javac $(JTESTFLAGS) $(TESTFILES)
+jar: main
+	$(JARJAR) $(JARFLAGS) $(MAINPATH)
 
-jar: build
-	jar $(JARFLAGS) $(CLASSPATH)/*.class
+run:
+	java $(JRUNFLAGS) $(MAINNAME)
+
+folders: 
+	@mkdir -p $(CLASSPATH)/$(MAINPATH) $(CLASSPATH)/$(TESTPATH)
 
 clean:
-	rm -rf $(CLASSPATH) $(DOCPATH)
+	rm -rf $(CLASSPATH) $(DOCPATH) *.jar
