@@ -2,146 +2,147 @@
 ## Problem P-3.10 in G&T
 Program that solves the Towers of Hanoi
 
-## Solution to Towers of Hanoi for 4 liscs
+## Solution to Towers of Hanoi for 4 discs
+Each row represents a tower, because I was too lazy to actually make it pretty.
 <table border=1>
 	<tr>
 		<td>
-			<ol>
-				<li>1.</li> 
+			1.
+			<ul>
 				<li>- 4 3 2 1</li>
 				<li>- </li>		
 				<li>- </li>
-			</ol>	
+			</ul>	
 		</td>
 		<td>
-			<ol>
-				<li>2.</li>
+			2.
+			<ul>
 				<li>- 4 3 2</li>
 				<li>- 1</li>
 				<li>- </li>
-			</ol>
+			</ul>
 		</td>
 		<td>
-			<ol>
-				<li>3.</li>
+			3.
+			<ul>
 				<li>- 4 3</li>
 				<li>- 1</li>
 				<li>- 2</li>
-			</ol>
+			</ul>
 		</td>
 	</tr>
 	<tr>
 		<td>
-			<ol>
-				<li>4.</li>
+			4.
+			<ul>
 				<li>- 4 3</li>
 				<li>- </li>
 				<li>- 2 1</li>
-			</ol>
+			</ul>
 		</td>
 		<td>
-			<ol>
-				<li>5.</li>
+			5.
+			<ul>
 				<li>- 4</li>
 				<li>- 3 </li>
 				<li>- 2 1</li>
-			</ol>
+			</ul>
 		</td>
 		<td>
-			<ol>
-				<li>6.</li>
+			6.
+			<ul>
 				<li>- 4 1</li>
 				<li>- 3 </li>
 				<li>- 2</li>
-			</ol>
+			</ul>
 		</td>
 	</tr>
 	<tr>
 		<td>
-			<ol>
-				<li>7.</li>
+			7.
+			<ul>
 				<li>- 4 1</li>
 				<li>- 3 2</li>
 				<li>- </li>
-			</ol>
+			</ul>
 		</td>
 		<td>
-			<ol>
-				<li>8.</li>
+			8.
+			<ul>
 				<li>- 4</li>
 				<li>- 3 2 1</li>
 				<li>- </li>
-			</ol>
+			</ul>
 		</td>
 		<td>
-			<ol>
-				<li>9.</li>
+			9.
+			<ul>
 				<li>- </li>
 				<li>- 3 2 1</li>
 				<li>- 4</li>
-			</ol>
+			</ul>
 		</td>
 	</tr>
 	<tr>
 		<td>
-			<ol>
-				<li>10.</li>
+			10.
+			<ul>
 				<li>- </li>
 				<li>- 3 2</li>
 				<li>- 4 1</li>
-			</ol>
+			</ul>
 		</td>
 		<td>
-			<ol>
-				<li>11.</li>
+			11.
+			<ul>
 				<li>- 2</li>
 				<li>- 3</li>
 				<li>- 4 1</li>
-			</ol>
+			</ul>
 		</td>
 		<td>
-			<ol>
-				<li>12.</li>
+			12.
+			<ul>
 				<li>- 2 1</li>
 				<li>- 3</li>
 				<li>- 4</li>
-			</ol>
+			</ul>
 		</td>
 	</tr>
 	<tr>
 		<td>
-			<ol>
-				<li>13.</li>
+			13.
+			<ul>
 				<li>- 2 1</li>
 				<li>-</li>
 				<li>- 4 3</li>
-			</ol>
+			</ul>
 		</td>
 		<td>
-			<ol>
-				<li>14.</li>
+			14.
+			<ul>
 				<li>- 2<br></li>
 				<li>- 1<br></li>
 				<li>- 4 3<br></li>
-			</ol>
+			</ul>
 		</td>
 		<td>
-			<ol>
-				<li>15.</li>
+			15.
+			<ul>
 				<li>- </li>
 				<li>- 1</li>
 				<li>- 4 3 2</li>
-			</ol>
+			</ul>
 		</td>
 	</tr>
 	<tr>
 		<td>
-			<ol>
-				<li>16.</li>
+			16.
+			<ul>
 				<li>- </li>
 				<li>- </li>
 				<li>- 4 3 2 1</li>
-			</ol>
+			</ul>
 		</td>
 	</tr>
 </table>
