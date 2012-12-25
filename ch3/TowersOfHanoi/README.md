@@ -1,6 +1,6 @@
 # Towers Of Hanoi
 ## Problem P-3.10 in G&T
-Program that solves the Towers of Hanoi
+Program that solves the Towers of Hanoi problem. This program will take in a number for the main tower size and then demonstrate the solution to move all of the blocks to another tower.
 
 ## Solution to Towers of Hanoi for 4 discs
 Each row represents a tower, because I was too lazy to actually make it pretty.
@@ -146,3 +146,40 @@ Each row represents a tower, because I was too lazy to actually make it pretty.
 		</td>
 	</tr>
 </table>
+
+## Notes for the Solution
+
+### Ideas for how this works
+* Sequential building-up and breaking-down of towers to get from one thing to another thing
+* Buiding up and breaking down depends on how many more blocks to place and where we want the blocks to go
+
+### Pseudo code for solving the towers of hanoi
+Code for breaking down a tower, which wants to go to towerTo
+```
+BreakDown(towerFrom, towerTo, bottomSize)
+	while(towerFrom.Top <= bottomSize)
+		isOddBlock = (bottomSize - towerFrom.Top) % 2
+		if(isOddBlock)
+			try to put towerFrom.Top onto not towerTo
+			if can't, BuildUp(towerTo, bottomSize - towerFrom.Top)
+		else
+			try to put towerFrom.Top onto towerTo
+			if can't, BuildUp(not towerTo, bottomSize - towerFrom.Top)
+		end
+	end
+end
+```
+
+Code for building up a tower with base block size bottomSize
+```
+BuildUp(tower, bottomSize)
+	while(tower.Top != 1)
+		if(either other tower has tower.Top-1 on top)
+			move otherTower.top to tower.Top
+		else
+			BreakDown(tower with needed block, other tower ,tower.Top+1)
+		end
+	end
+end
+```
+woo!
