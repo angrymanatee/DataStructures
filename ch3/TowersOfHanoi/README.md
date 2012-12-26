@@ -30,8 +30,6 @@ Each row represents a tower, because I was too lazy to actually make it pretty.
 				<li>- 2</li>
 			</ul>
 		</td>
-	</tr>
-	<tr>
 		<td>
 			4.
 			<ul>
@@ -82,8 +80,6 @@ Each row represents a tower, because I was too lazy to actually make it pretty.
 				<li>- 4</li>
 			</ul>
 		</td>
-	</tr>
-	<tr>
 		<td>
 			10.
 			<ul>
@@ -134,8 +130,6 @@ Each row represents a tower, because I was too lazy to actually make it pretty.
 				<li>- 4 3 2</li>
 			</ul>
 		</td>
-	</tr>
-	<tr>
 		<td>
 			16.
 			<ul>
@@ -177,7 +171,7 @@ BuildUp(tower, bottomSize)
 		if(either other tower has tower.Top-1 on top)
 			move otherTower.top to tower.Top
 		else
-			BreakDown(tower with needed block, other tower ,tower.Top+1)
+			BreakDown(tower with needed block, other tower ,tower.Top-1)
 		end
 	end
 end

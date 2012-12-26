@@ -15,18 +15,22 @@ public class TowersOfHanoi {
 
 	private Tower[] tower;
 
+	protected int startingDepth;
 	/**
 	 *	Makes a new set of towers
 	 *	@param start tower that has initial data
-	 *	@param depth number of blocks to start initial tower with
+	 *	@param startingDepth number of blocks to start initial tower with
 	 */
-	public TowersOfHanoi(int start, int depth) {
+	public TowersOfHanoi(int start, int startingDepth) {
 		this.tower = new Tower[NUMBER_OF_TOWERS];
+		this.startingDepth = startingDepth;
 		for(int currentTower = 0; currentTower<NUMBER_OF_TOWERS; currentTower++) {
-			if(currentTower==start-1)
-				this.tower[currentTower] = new Tower(depth);
-			else
+			if(currentTower==start-1) {
+				this.tower[currentTower] = new Tower(startingDepth);
+			}
+			else {
 				this.tower[currentTower] = new Tower(0);
+			}
 		}
 	}
 
@@ -35,10 +39,10 @@ public class TowersOfHanoi {
 	 *	@param from initial position
 	 *	@param to final position
 	 */
-	public void moveBlock(int from, int to) {
-		int movingBlockSize = tower[from].peek();
+	public void MoveBlock(int from, int to) {
+		int movingBlockSize = tower[from-1].peek();
 		try{
-			tower[to].push(tower[from].pop());
+			tower[to-1].push(tower[from-1].pop());
 		}
 		catch(IllegalArgumentException e) {
 			throw new IllegalArgumentException("Can't put block size " + 
@@ -53,18 +57,20 @@ public class TowersOfHanoi {
 
 	/**
 	 *	Returns list of tower elements
+	 *	@param towerToInspect Tower to get data from
 	 *	@return Tab delineated list of tower elements
 	 */
-	public String inspectFullTower(int towerToInspect) {
-		return tower[towerToInspect].toString();
+	public String InspectFullTower(int towerToInspect) {
+		return tower[towerToInspect-1].toString();
 	}
 
 	/**
 	 *	peek at top element of a tower
+	 *	@param towerToPeek tower to look at (initialized at 1)
 	 *	@return size of the top block 
 	 */
-	public int topElement(int towerToPeek) {
-		return tower[towerToPeek].peek();
+	public int TopBlock(int towerToPeek) {
+		return tower[towerToPeek-1].peek();
 	}
 	
 
@@ -74,8 +80,9 @@ public class TowersOfHanoi {
 	 */
 	public String toString() {
 		String output = "";
-		for(Tower currentTower : tower)
-			output += currentTower.toString() + "\n";
+		for(int i = 0; i < NUMBER_OF_TOWERS ; i++) {
+			output += tower[i].toString() + "\n";
+		}
 		return output;
 	}
 
@@ -140,7 +147,7 @@ public class TowersOfHanoi {
 		 */
 		public int peek() {
 			if(this.top == null) {
-				return 0;
+				return startingDepth+1;
 			}
 			else return this.top.getSize();
 		}
@@ -152,12 +159,15 @@ public class TowersOfHanoi {
 		 *	@return Tab delineated String of blocks beneath this one. Ordered from highest (smallest) block to lowest (largest) block.
 		 */
 		public String inspect(Block inspectee) {
+			if(inspectee == null) {
+				return "-";
+			}
 			if(inspectee.nextBlock()==null) {
 				return Integer.toString(inspectee.getSize());
 			}
 			else {
-				return inspectee.getSize() + "\t" +
-					this.inspect(inspectee.nextBlock());
+				return this.inspect(inspectee.nextBlock()) 
+						+ "\t" + inspectee.toString();
 			}
 		}
 
